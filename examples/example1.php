@@ -59,7 +59,7 @@ class myDSL
 myDSL::$debug = true;
 
 echo myDSL::exec(function(){
-    return filtered(
+	return filtered(
 		query(
 			queryString(array(
 				'default_field'=>'message',
@@ -68,17 +68,17 @@ echo myDSL::exec(function(){
 		),
 		filter(
 			_bool(
-        		must(
-        		    term('tag','wow')
-        		),
-        		must_not(
-        		    _range('age',10,20)
-        		),
-        		should(
-        		    term('tag','sometag'),
-        		    term('tag','sometagtag')
-        		)
-    		)
+				must(
+					term('tag','wow')
+				),
+				must_not(
+					_range('age',10,20)
+				),
+				should(
+					term('tag','sometag'),
+					term('tag','sometagtag')
+				)
+			)
 		)
 	);
 });
@@ -88,34 +88,34 @@ echo myDSL::exec(function(){
 Generates the following JSON:
 
 {
-    "filtered" : {
-        "query" : {
-            "queryString" : { 
-                "default_field" : "message", 
-                "query" : "elasticsearch"
-            }
-        },
-        "filter" : {
-            "bool" : {
-                "must" : {
-                    "term" : { "tag" : "wow" }
-                },
-                "must_not" : {
-                    "range" : {
-                        "age" : { "from" : 10, "to" : 20 }
-                    }
-                },
-                "should" : [
-                    {
-                        "term" : { "tag" : "sometag" }
-                    },
-                    {
-                        "term" : { "tag" : "sometagtag" }
-                    }
-                ]
-            }
-        }
-    }
+	"filtered" : {
+		"query" : {
+			"queryString" : { 
+				"default_field" : "message", 
+				"query" : "elasticsearch"
+			}
+		},
+		"filter" : {
+			"bool" : {
+				"must" : {
+					"term" : { "tag" : "wow" }
+				},
+				"must_not" : {
+					"range" : {
+						"age" : { "from" : 10, "to" : 20 }
+					}
+				},
+				"should" : [
+					{
+						"term" : { "tag" : "sometag" }
+					},
+					{
+						"term" : { "tag" : "sometagtag" }
+					}
+				]
+			}
+		}
+	}
 }
 
  */
